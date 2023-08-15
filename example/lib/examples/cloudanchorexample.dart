@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
@@ -443,15 +441,15 @@ class FirebaseManager {
     GeoFirePoint center =
         geo!.point(latitude: location.latitude, longitude: location.longitude);
 
-    Stream<List<DocumentSnapshot>> stream = geo!
-        .collection(collectionRef: anchorCollection!)
-        .within(center: center, radius: radius, field: 'position');
-
-    stream.listen((List<DocumentSnapshot> documentList) {
-      documentList.forEach((element) {
-        listener(element);
-      });
-    });
+    // Stream<List<DocumentSnapshot>> stream = geo!
+    //     .collection(collectionRef: anchorCollection)
+    //     .within(center: center, radius: radius, field: 'position');
+    //
+    // stream.listen((List<DocumentSnapshot> documentList) {
+    //   documentList.forEach((element) {
+    //     listener(element);
+    //   });
+    // });
   }
 
   void downloadAnchorsByChannel() {}

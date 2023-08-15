@@ -14,6 +14,7 @@ import 'package:vector_math/vector_math_64.dart';
 
 class ScreenshotWidget extends StatefulWidget {
   const ScreenshotWidget({Key? key}) : super(key: key);
+
   @override
   _ScreenshotWidgetState createState() => _ScreenshotWidgetState();
 }
@@ -38,10 +39,8 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
         appBar: AppBar(
           title: const Text('Screenshots'),
         ),
-        body: 
-        Container(
-            child:
-          Stack(children: [
+        body: Container(
+            child: Stack(children: [
           ARView(
             onARViewCreated: onARViewCreated,
             planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
@@ -84,14 +83,9 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   }
 
   Future<void> onRemoveEverything() async {
-    /*nodes.forEach((node) {
-      this.arObjectManager.removeNode(node);
-    });*/
-    // anchors.forEach((anchor)
-    for (var anchor in anchors)
-     {
+    for (var anchor in anchors) {
       arAnchorManager!.removeAnchor(anchor);
-    };
+    }
     anchors = [];
   }
 
@@ -132,7 +126,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));
         bool? didAddNodeToAnchor =
             await arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
-        
+
         if (didAddNodeToAnchor != null && didAddNodeToAnchor) {
           nodes.add(newNode);
         } else {
@@ -141,17 +135,6 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
       } else {
         arSessionManager!.onError("Adding Anchor failed");
       }
-      /*
-      // To add a node to the tapped position without creating an anchor, use the following code (Please mind: the function onRemoveEverything has to be adapted accordingly!):
-      var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "Models/Chicken_01/Chicken_01.gltf",
-          scale: Vector3(0.2, 0.2, 0.2),
-          transformation: singleHitTestResult.worldTransform);
-      bool didAddWebNode = await this.arObjectManager.addNode(newNode);
-      if (didAddWebNode) {
-        this.nodes.add(newNode);
-      }*/
     }
   }
 }
